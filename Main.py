@@ -40,12 +40,14 @@ while game_on:
         
     if snake.head.xcor() > 299 or snake.head.xcor() < -299 or snake.head.ycor() > 299 or snake.head.ycor() < -299:
         hit_sound.play()
-        game_on = False
-        score.game_over()
+        Scoreboard.reset()
+        snake.reset()
 
     for i in snake.parts[1:]:
-        if snake.head.distance(i) < 1:
-            game_on = False
-            score.game_over()
+        if i == snake.head:
+            pass
+        elif snake.head.distance(i) < 1:
+            Scoreboard.reset()
+            snake.reset()
 
 screen.exitonclick()
