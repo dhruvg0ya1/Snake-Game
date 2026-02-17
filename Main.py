@@ -44,7 +44,6 @@ screen.onkey(snake.left, 'a')
 screen.onkey(snake.right, 'd')
 screen.onkey(on_space, 'space')
 
-# Main loop supports restarting the game when spacebar is pressed after game over
 while True:
     game_on = True
     paused = False
@@ -69,7 +68,6 @@ while True:
                 music.stop()
                 hit_sound.play()
                 score.reset()
-                # Do not reset the snake position here so it stays at collision location
                 score.game_over()
             for i in snake.parts[1:]:
                 if snake.head.distance(i) < 1:
@@ -77,19 +75,14 @@ while True:
                     music.stop()
                     hit_sound.play()
                     score.reset()
-                    # Keep snake where it collided (do not reset here)
                     score.game_over()
 
-    # Wait for user to press spacebar to restart
     while not restart_requested:
         screen.update()
         time.sleep(0.1)
 
-    # Prepare for restart: reset snake and clear game-over text
     snake.reset()
-    # Put food somewhere safe
     food.refresh()
-    # Clear GAME OVER messages and show the scoreboard at top
     score.clear()
     score.goto(0, 280)
     score.write(f'Score: {score.score} High Score: {score.high_score}', False, 'center', ('Courier', 12 , 'normal'))
