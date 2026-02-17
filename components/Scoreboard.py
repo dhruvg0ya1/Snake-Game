@@ -17,6 +17,7 @@ class Scoreboard(Turtle):
     def inc_score(self):
         self.score += 1
         self.clear()
+        self.goto(0, 280)
         self.write(f'Score: {self.score} High Score: {self.high_score}', False, 'center', FONT)
 
     def reset(self):
@@ -26,8 +27,11 @@ class Scoreboard(Turtle):
                 file.write(f"{self.high_score}")
         self.score = 0
         self.clear()
+        self.goto(0, 280)
         self.write(f'Score: {self.score} High Score: {self.high_score}', False, 'center', FONT)
         
     def game_over(self):
-        self.goto(0, 0)
+        self.goto(0, 20)
         self.write("GAME OVER", False, 'center', GAME_OVER_FONT)
+        self.goto(0, -20)
+        self.write('Press "spacebar" to restart', False, 'center', FONT)
